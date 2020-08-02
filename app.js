@@ -33,3 +33,102 @@ const render = require("./lib/htmlRenderer");
 // for further information. Be sure to test out each class and verify it generates an
 // object with the correct structure and methods. This structure will be crucial in order
 // for the provided `render` function to work! ```
+
+const employees = [];
+
+const getCount = (result) => {
+    return inquirer.prompt([{
+        type: "input",
+        message: "How many employees would you like to add?",
+        name: "count"
+    }]);
+};
+
+const getRole = (result) => {
+    return inquirer.prompt([{
+        type: "list",
+        message: "Please select your role:",
+        name: "role",
+        choices: ["Intern", "Engineer", "Manager"]
+    }]);
+};
+
+const getEmployeeInfo = (result) => {
+    return inquirer.prompt([{
+            type: "input",
+            message: "Please enter your name:",
+            name: "name"},
+        {
+            type: "input",
+            message: "Please enter your ID:",
+            name: "id"
+        },
+        {
+            type: "input",
+            message: "Please enter your email:",
+            name: "email"
+        }
+    ]);
+};
+
+const getSchool = (result) => {
+    return inquirer.prompt([{
+        type: "input",
+        message: "Please enter your school:",
+        name: "school"
+    }]);
+};
+
+const getGithub = (result) => {
+    return inquirer.prompt([{
+        type: "input",
+        message: "Please enter your github username:",
+        name: "github"
+    }]);
+};
+
+const getOfficeNumber = (result) => {
+    return inquirer.prompt([{
+        type: "input",
+        message: "Plese enter your office number:",
+        name: "officeNumber"
+    }]);
+};
+
+const main = async () => {
+    const {count} = await getCount();
+    
+    for(let empCount = 0; empCount < count; empCount++) {
+        const {role} = await getRole();
+        const {name, id, email} = await getEmployeeInfo();
+        switch(role) {
+            case "Intern":
+                const {school} = await getSchool();
+                const intern = new Intern(name, id, email, school);
+                employees.push(intern);
+                break;
+            case "Engineer":
+                const {github} = await getGithub();
+                const engineer = new Engineer(name, id, email, github);
+                employees.push(engineer);
+                break;
+            case "Manager":
+                const {officeNumber} = await getOfficeNumber();
+                const manager = new Manager(name, id, email, officeNumber);
+                employees.push(manager);
+                break;
+        }
+    }
+
+    const html = render(employees);
+
+    if(!fs.existsSync("./output"))
+        fs.mkdirSync("./output");
+
+    fs.writeFileSync("./output/team.html", html, (err) => {
+        if(err)
+            console.log(err);
+    });
+}
+
+main();
