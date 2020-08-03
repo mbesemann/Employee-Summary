@@ -10,15 +10,15 @@ Generates a team summary page with position and contact details for each employe
 5. [Tests](#tests)
 6. [Questions](#questions)
 # Installation
-npm i, run with node app
+`npm i`
 # Usage
-node app
+`node app`
 # License
 MIT License
 # Contributing
 Submit a pull request!
 # Tests
-npm run test
+`npm run test`
 # Questions
 Feel free to post an issue on my GitHub profile: @[mbesemann](https://github.com/mbesemann)
 or contact me via email at mattiasb@hey.com
