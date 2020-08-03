@@ -2,6 +2,8 @@
 # Employee Summary
 # Description
 Generates a team summary page with position and contact details for each employee
+
+![Screenshot](assets/screenshot.png)
 # Table of Contents
 1. [Installation](#installation)
 2. [Usage](#usage)
